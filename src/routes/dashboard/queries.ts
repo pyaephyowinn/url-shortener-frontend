@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export function useGetUrls() {
   return useQuery({
-    queryKey: [urlKeys.lists()],
+    queryKey: urlKeys.lists(),
     queryFn: getUrls,
     select: (data) => data.data?.data,
   });

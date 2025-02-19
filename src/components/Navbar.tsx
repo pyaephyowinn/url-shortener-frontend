@@ -3,9 +3,7 @@ import { Code, Group, Text } from "@mantine/core";
 import classes from "./Navbar.module.css";
 import { NavLink } from "react-router";
 
-const pageLinks = [
-  { link: "/d/dashboard", label: "Dashboard", icon: IconGauge },
-];
+const pageLinks = [{ link: "/d", label: "Your URLs", icon: IconGauge }];
 
 export function Navbar() {
   const links = pageLinks.map((item) => (
