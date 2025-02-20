@@ -6,11 +6,14 @@ export function getUrls() {
 }
 
 export function checkShortUrl(shortUrl: string) {
-  return apiClient.get<{ data: { found: boolean } }>("/url/check", {
-    params: {
-      shortUrl,
-    },
-  });
+  return apiClient.get<{ data: { found: boolean; originalUrl: string } }>(
+    "/url/check",
+    {
+      params: {
+        shortUrl,
+      },
+    }
+  );
 }
 
 export function createUrl(data: UrlType) {

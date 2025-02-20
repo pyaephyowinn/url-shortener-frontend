@@ -1,9 +1,12 @@
-import { Center, Loader } from "@mantine/core";
+import { Center, Flex, Loader, Text } from "@mantine/core";
 
-export function PageLoading() {
+export function PageLoading({ label }: { label?: string }) {
   return (
     <Center h="100vh" w="100%">
-      <Loader color="blue" />
+      <Flex gap="md" align="center">
+        <Loader color="blue" />
+        {label && <Text>{label}</Text>}
+      </Flex>
     </Center>
   );
 }

@@ -2,7 +2,7 @@ import { Routes as ReactRouterRoutes, Route } from "react-router";
 import { DashboardLayout } from "@/layouts";
 import { LoginRoute } from "@/routes/auth";
 import { DashboardRoute } from "@/routes/dashboard";
-import { EditUrlRoute, NewUrlRoute } from "@/routes/url";
+import { EditUrlRoute, NewUrlRoute, RedirectRoute } from "@/routes/url";
 
 export function Routes() {
   return (
@@ -16,6 +16,8 @@ export function Routes() {
         <Route path="new" element={<NewUrlRoute />} />
         <Route path=":id" element={<EditUrlRoute />} />
       </Route>
+
+      <Route path=":shortUrl" element={<RedirectRoute />} />
     </ReactRouterRoutes>
   );
 }

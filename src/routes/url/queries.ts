@@ -11,6 +11,15 @@ export function useCheckShortUrl() {
   });
 }
 
+export function useGetCheckShortUrl(shortUrl: string) {
+  return useQuery({
+    queryKey: urlKeys.details(),
+    queryFn: () => checkShortUrl(shortUrl),
+    select: (data) => data.data?.data,
+    enabled: !!shortUrl,
+  });
+}
+
 export function useCreateUrl() {
   const navigate = useNavigate();
   return useMutation({
