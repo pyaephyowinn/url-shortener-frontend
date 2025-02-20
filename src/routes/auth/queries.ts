@@ -14,7 +14,7 @@ export function useLogin() {
       const { user, session } = res?.data?.data || {};
       showNotification({
         title: "Login Success!",
-        message: "You have successfully logged in aaa.",
+        message: "You have successfully logged.",
       });
       setUser({
         email: user?.email,
