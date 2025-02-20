@@ -10,15 +10,12 @@ import {
   Title,
 } from "@mantine/core";
 import classes from "./LoginRoute.module.css";
-import { useLogin } from "./queries";
+import { useRegister } from "./queries";
 import { useForm, zodResolver } from "@mantine/form";
-import { loginSchema, LoginType } from "@/configs/schemas";
+import { loginSchema, RegisterType } from "@/configs/schemas";
 import { NavLink } from "react-router";
-import { useCheckRedirect } from "@/hooks/useCheckRedirect";
-import { PageLoading } from "@/components/PageLoading";
 
-export function LoginRoute() {
-  const { loading } = useCheckRedirect();
+export function RegisterRoute() {
   const { getInputProps, onSubmit, key } = useForm({
     initialValues: {
       email: "",
@@ -26,25 +23,21 @@ export function LoginRoute() {
     },
     validate: zodResolver(loginSchema),
   });
-  const { mutate, isPending } = useLogin();
+  const { mutate, isPending } = useRegister();
 
-  const handleSubmit = (values: LoginType) => {
+  const handleSubmit = (values: RegisterType) => {
     mutate(values);
   };
-
-  if (loading) {
-    return <PageLoading label="Checking authentication ..." />;
-  }
 
   return (
     <Container size={420} my={40}>
       <Title ta="center" className={classes.title}>
-        Welcome back!
+        Create your account
       </Title>
       <Text c="dimmed" size="sm" ta="center" mt={5}>
-        Do not have an account yet?{" "}
-        <Anchor size="sm" component={NavLink} to="/register">
-          Create account
+        Do you have an account?{" "}
+        <Anchor size="sm" component={NavLink} to="/">
+          Sign in
         </Anchor>
       </Text>
 
@@ -78,7 +71,7 @@ export function LoginRoute() {
           </Anchor>
         </Group>
         <Button fullWidth mt="xl" type="submit" loading={isPending}>
-          Sign in
+          Sign Up
         </Button>
       </Paper>
     </Container>

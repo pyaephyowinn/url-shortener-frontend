@@ -12,6 +12,9 @@ export const loginSchema = z.object({
 
 export type LoginType = z.infer<typeof loginSchema>;
 
+export const registerSchema = loginSchema;
+export type RegisterType = z.infer<typeof registerSchema>;
+
 export const urlSchema = z.object({
   originalUrl: z
     .string()
