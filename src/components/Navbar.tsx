@@ -1,11 +1,29 @@
-import { IconGauge, IconLogout, IconSettings } from "@tabler/icons-react";
-import { Code, Group, Text } from "@mantine/core";
+import { IconGauge, IconLogout } from "@tabler/icons-react";
+import { Button, Code, Group, Text } from "@mantine/core";
 import classes from "./Navbar.module.css";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { modals } from "@mantine/modals";
+import { useUserStore } from "@/store/useUser";
 
 const pageLinks = [{ link: "/d", label: "Your URLs", icon: IconGauge }];
 
 export function Navbar() {
+  const { removeUser } = useUserStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () =>
+    modals.openConfirmModal({
+      centered: true,
+      title: "Are you sure?",
+      children: <Text size="sm">Are you sure you want to logout?</Text>,
+
+      labels: { confirm: "Confirm", cancel: "Cancel" },
+      onConfirm: () => {
+        removeUser();
+        navigate("/", { replace: true });
+      },
+    });
+
   const links = pageLinks.map((item) => (
     <NavLink
       className={({ isActive }) =>
@@ -32,24 +50,16 @@ export function Navbar() {
       </div>
 
       <div className={classes.footer}>
-        <NavLink
-          className={({ isActive }) =>
-            `${classes.link} ${isActive ? classes.active : ""}`
-          }
-          to="/d/settings"
-        >
-          <IconSettings className={classes.linkIcon} stroke={1.5} />
-          <span>Settings</span>
-        </NavLink>
-
-        <a
-          href="#"
+        <Button
+          onClick={handleLogout}
           className={classes.link}
-          onClick={(event) => event.preventDefault()}
+          variant="subtle"
+          w="100%"
+          c="dark"
         >
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>
-        </a>
+        </Button>
       </div>
     </nav>
   );
