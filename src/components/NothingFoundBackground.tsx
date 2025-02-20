@@ -16,6 +16,9 @@ export function NothingFoundBackground() {
             c="dimmed"
             size="lg"
             ta="center"
+            mx="auto"
+            mt="xl"
+            mb="xl"
             className={classes.description}
           >
             Page you are trying to open does not exist. You may have mistyped
